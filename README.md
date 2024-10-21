@@ -131,7 +131,7 @@ Bitcoin Script language is used to validate Bitcoin transactions. The spender mu
 
 A transaction is valid if no errors are triggered and the top stack item is True (non-zero) when the script exits.
 
-## Standard Transaction to Bitcoin address (pay-to-pubkey-hash)
+## Standard Transaction to Bitcoin address (pay-to-pubkey-hash) [P2PKH]
 ```
 scriptPubKey: OP_DUP OP_HASH160 <pubKeyHash> OP_EQUALVERIFY OP_CHECKSIG
 scriptSig: <sig> <pubKey>
