@@ -121,3 +121,37 @@ Info retrieved from: https://en.bitcoin.it/wiki/Script
 | 0xB8  | OP_NOP9                 |                 |          |                                                      |                   |           | The word is ignored. Does not mark transaction as invalid.                                                                                                                                                                                                                                                                                                                              |
 | 0xB9  | OP_NOP10                |                 |          |                                                      |                   |           | The word is ignored. Does not mark transaction as invalid.                                                                                                                                                                                                                                                                                                                              |
 | 0xBA  | OP_CHECKSIGADD          |                 |          | sig n pub                                             | out               | Taproot   | Three values are popped from the stack. The integer n is incremented by one and returned to the stack if the signature is valid for the public key and transaction. The integer n is returned to the stack unchanged if the signature is the empty vector (OP_0). In any other case, the script is invalid. This opcode is only available in tapscript.                                     |
+
+
+# Script
+
+Bitcoin Script language is used to validate Bitcoin transactions. The spender must provide:
+* `scriptPubKey`: One or more public keys and the OPCODES to validate them. Is the output of the previously unspent (available) transaction.
+* `scriptSig`: Signature to prove ownership. Is the input of the spending transaction.
+
+A transaction is valid if no errors are triggered and the top stack item is True (non-zero) when the script exits.
+
+## Standard Transaction to Bitcoin address (pay-to-pubkey-hash)
+```
+scriptPubKey: OP_DUP OP_HASH160 <pubKeyHash> OP_EQUALVERIFY OP_CHECKSIG
+scriptSig: <sig> <pubKey>
+```
+
+In the stack `scriptSig` and `scriptPubKey` are combined in that order.
+
+Stack layout after the OP_DUP is executed:
+```
+|    <pubKey>     | <---- top of the stack
+|    <pubKey>     |
+|      <sig>      | <---- bottom of the stack
+|-----------------|
+```
+
+# Obsolete pay-to-pubkey transaction
+
+Used in initial Bitcoin core versions, but still compatible:
+
+```
+scriptPUbKey: <pubKey> OP_CHECKSIG
+scriptSig: <sig>
+```
