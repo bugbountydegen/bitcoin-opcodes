@@ -126,8 +126,8 @@ Info retrieved from: https://en.bitcoin.it/wiki/Script
 # Script
 
 Bitcoin Script language is used to validate Bitcoin transactions. The spender must provide:
-* `scriptPubKey`: One or more public keys and the OPCODES to validate them. Is the output of the previously unspent (available) transaction.
-* `scriptSig`: Signature to prove ownership. Is the input of the spending transaction.
+* `scriptPubKey`: One or more public keys and the OPCODES to validate them. Is the output of the previously unspent (available) transaction. ( ~to )
+* `scriptSig`: Signature to prove ownership. Is the input of the spending transaction. ( ~from )
 
 A transaction is valid if no errors are triggered and the top stack item is True (non-zero) when the script exits.
 
@@ -147,7 +147,7 @@ Stack layout after the OP_DUP is executed:
 |-----------------|
 ```
 
-# Obsolete pay-to-pubkey transaction
+## Obsolete pay-to-pubkey transaction
 
 Used in initial Bitcoin core versions, but still compatible:
 
@@ -155,3 +155,18 @@ Used in initial Bitcoin core versions, but still compatible:
 scriptPUbKey: <pubKey> OP_CHECKSIG
 scriptSig: <sig>
 ```
+
+## Provably unspendable outputs
+
+```
+scriptPubKey: OP_RETURN (.*)
+```
+
+Those transactions are marked as invalid and get ignored to compute the UTXO. They are used to store data in the blockchain, as for example, Bitcoin Runes which implemented NFTs on Bitcoin. They can be also used to burn bitcoins.
+
+
+
+
+# References:
+* https://en.bitcoin.it/wiki/Script
+* [https://learnmeabitcoin.com/technical/script/return/](https://learnmeabitcoin.com/technical/transaction/input/scriptsig/)
