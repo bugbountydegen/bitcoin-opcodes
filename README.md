@@ -169,4 +169,5 @@ Those transactions are marked as invalid and get ignored to compute the UTXO. Th
 
 # References:
 * https://en.bitcoin.it/wiki/Script
-* [https://learnmeabitcoin.com/technical/script/return/](https://learnmeabitcoin.com/technical/transaction/input/scriptsig/)
+* https://learnmeabitcoin.com/technical/transaction/input/scriptsig/ `scriptSig` internals
+* https://learnmeabitcoin.com/technical/transaction/witness/ `scriptSig` replacement by Witness (>segwit fork)
